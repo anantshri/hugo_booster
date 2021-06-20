@@ -1,0 +1,4 @@
+{
+	endpoint: "https://api.instagram.com/oembed/"
+	pattern: "^https?://(www\\.)?instagr(\\.am|am\\.com)/((.*/)?p/|tv/)"
+}

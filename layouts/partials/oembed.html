@@ -1,0 +1,21 @@
+{{ $url := . }}
+{{ $videoUrl := urls.Parse $url }}
+{{ if ( findRE "(youtu)" $videoUrl.Host 1 ) }}
+  {{ $youtube := getJSON "https://www.youtube.com/oembed?maxwidth=450&maxheight=250&url=" $url }}
+  {{ $frame := printf "title='%s' " $youtube.title | printf "%s%s" "iframe loading='lazy' "  }}
+  {{ with $youtube.html }}
+    {{ replace . "iframe " $frame  | safeHTML }}
+  {{ end }}
+{{ else if ( findRE "(vimeo)" $videoUrl.Host 1 ) }}
+  {{ $vimeo := getJSON "https://vimeo.com/api/oembed.json?maxwidth=450&maxheight=250&url=" $url }}
+  {{ $frame := printf "title='%s' " $vimeo.title | printf "%s%s" "iframe loading='lazy' "  }}
+  {{ with $vimeo.html }}
+    {{ replace . "iframe " $frame   | safeHTML }}
+  {{ end }}
+{{ else if ( findRE "(slideshare)" $videoUrl.Host 1 ) }}
+  {{ $slideshare := getJSON "https://www.slideshare.net/api/oembed/2?maxwidth=450&maxheight=250&url=" $url }}
+  {{ $frame := printf "title='%s' " $slideshare.title | printf "%s%s" "iframe loading='lazy' "  }}
+  {{ with $slideshare.html }}
+    {{ replace . "iframe " $frame  | replaceRE "<div(.*)</div>" "" | safeHTML }}
+  {{ end }}
+{{ end }}

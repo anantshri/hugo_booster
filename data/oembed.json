@@ -1,0 +1,8 @@
+{
+	endpoint: "https://api.instagram.com/oembed/",
+	pattern: "^https?://(www\\.)?instagr(\\.am|am\\.com)/((.*/)?p/|tv/)"
+},
+{
+	endpoint: "https://publish.twitter.com/oembed"
+	pattern: "http?://(www\\.)?twitter.com/(.*/)/status/"
+}
