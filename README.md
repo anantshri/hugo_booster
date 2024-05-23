@@ -1,2 +1,7 @@
-# extending_hugo
-A collection of self created or curated shortcodes and partials for Hugo
+# Hugo Booster
+
+A Sample theme created to showcase multiple booster items.
+
+* Near generic Oembed shortcode / partials
+* Timeline Code
+* 

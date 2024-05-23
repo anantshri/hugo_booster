@@ -8,10 +8,13 @@
 {{- range $.Site.Data.oembed }}
   {{- if le 1 ( findRE .pattern $embedURL.Host | len ) }}
     {{ $matched = 1 }}
+    <!-- these below two variables to defined here otherwise cant access them inside with context -->
     {{ $nowrapper := .nowrapper | default false }}
     {{ $autoheight := .autoheight | default false }}
-    {{- with (getJSON .endpoint "?" (querify "format" "json" "url" $url)) }}
-      {{ $frame := printf "title='%s' " .title | printf "%s%s" $frame_prop  }}
+    {{- $jsonUrl := printf "%s?format=json&url=%s" .endpoint $url }}
+    {{- $json := resources.GetRemote $jsonUrl | transform.Unmarshal }}
+    {{- with $json }}
+      {{ $frame := printf "title='%s' " .title | printf "%s%s" $frame_prop }}
       {{ $out := replace .html "iframe " $frame | safeHTML }}
       {{if $nowrapper }}
         {{ $out }}
@@ -29,6 +32,7 @@
 {{ end }}
 
 {{ if eq $matched 0 }}
-<h1> I dont Know how to embed this URL</h1>
+<br /><b>URL : </b>
 <a href="$url">{{ $url }}</a>
 {{ end }}
+
