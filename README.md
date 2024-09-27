@@ -17,3 +17,11 @@ Work in Progress:
 ## Code taken and adopted from other places
 
 1. https://github.com/martignoni/hugo-notice minimal admonision code from this repo
+
+use format like 
+
+```
+{{< notice warning >}}
+No Source Code available online
+{{< /notice >}}
+```
