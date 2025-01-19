@@ -13,13 +13,19 @@
     {{ $nowrapper := .nowrapper | default false }}
     {{ $autoheight := .autoheight | default false }}
     {{- $jsonUrl := printf "%s?format=json&url=%s" .endpoint $url }}
-    {{ with resources.GetRemote $jsonUrl }}
+    {{ with try (resources.GetRemote $jsonUrl) }}
       {{ with .Err }}
         {{ warnf "Error on %q : %s " $jsonUrl . }}
         <br /><b>URL : </b>
         <a href="{{ $url }}" target="_blank" rel="noreferrer noopener nofollow">{{ $url }}</a>
       {{ else }}
-        {{ $data = . | transform.Unmarshal }}
+        {{ with try ( .Value | transform.Unmarshal) }}
+          {{ with .Err }}
+            {{ warnf " Errorize %s " . }}
+          {{ else }}
+            {{ $data = .Value }}
+          {{ end }}
+        {{ end }}
       {{ end }}
     {{ else }}
       {{ warnf "Unable to get remote resource %q" $jsonUrl }}
