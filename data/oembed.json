@@ -36,5 +36,12 @@
 		"endpoint": "https://codesandbox.io/oembed",
 		"pattern": "codesandbox.io",
 		"remove":"<script(.*)</script>"
-	}
+	},
+	{
+		"endpoint": "https://podcasts.apple.com/api/oembed?url=",
+		"pattern": "podcasts.apple.com",
+		"remove":"<script(.*)</script>"
+	},
+
+
 ]
