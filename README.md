@@ -1,3 +1,9 @@
+> [!IMPORTANT]
+> This has been superseeded by [hugo-techie-personal](https://github.com/anantshri/hugo-techie-personal)
+> Please use the hugo-techie-personal theme
+
+
+
 # Hugo Booster
 
 A Sample theme created to showcase multiple booster items.
@@ -5,8 +11,6 @@ A Sample theme created to showcase multiple booster items.
 Currently working:
 
 * Near generic Oembed shortcode / partials
-
-
 
 
 Work in Progress:
